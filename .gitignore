@@ -2,3 +2,5 @@ spotify
 *.o
 *.out
 .DS_Store
+.vscode
+main.dSYM
