@@ -1,0 +1,4 @@
+spotify
+*.o
+*.out
+.DS_Store
