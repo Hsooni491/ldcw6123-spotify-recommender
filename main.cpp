@@ -1,11 +1,9 @@
 #include <iostream>
 #include <map>
-#include <vector>
 #include <string>
+#include <vector>
 
-
-
-int displayMessage(){
+int displayMessage() {
     int choice = 0;
     std::cout << "\n===== SPOTIFY MUSIC RECOMMENDATION ====\n";
     std::cout << "Choose your preferred mood/genre:\n";
@@ -19,30 +17,59 @@ int displayMessage(){
     return choice;
 }
 
-int logic(int choice){
-map<string, map<string, vector<string>>> tracks = {
-    {"Pop / Upbeat", {
-        {"Blinding Lights", {"The Weeknd", "Fast, synth-driven pop"}},
-        {"Levitating", {"Dua Lipa", "Bright, danceable disco-pop"}},
-        {"Shake It Off", {"Taylor Swift", "Cheerful, catchy pop"}}
-    }},
-    {"Hip-Hop / Energy", {
-        {"Lose Yourself", {"Eminem", "Intense, motivating rap"}},
-        {"HUMBLE.", {"Kendrick Lamar", "Hard-hitting beat with sharp lyrics"}},
-        {"SICKO MODE", {"Travis Scott", "High-energy trap with beat switches"}}
-    }},
-    {"Lo-Fi / Study", {
-        {"Snowman", {"WYS", "Soft, calm beats for focus"}},
-        {"Aruarian Dance", {"Nujabes", "Mellow jazz-hop for studying"}},
-        {"Affection", {"Jinsang", "Relaxed lo-fi for long study sessions"}}
-    }},
-    {"Rock / Classic", {
-        {"Bohemian Rhapsody", {"Queen", "Epic, dramatic classic rock"}},
-        {"Sweet Child O' Mine", {"Guns N' Roses", "Famous guitar riff and hard rock energy"}},
-        {"Hotel California", {"Eagles", "Smooth, timeless guitar-driven rock"}}
-    }}
-};
-int main(){
+void logic(int choice) {
+    std::map<std::string, std::map<std::string, std::vector<std::string>>> tracks = {
+        {"Pop / Upbeat", {
+            {"Blinding Lights", {"The Weeknd", "Fast, synth-driven pop"}},
+            {"Levitating", {"Dua Lipa", "Bright, danceable disco-pop"}},
+            {"Shake It Off", {"Taylor Swift", "Cheerful, catchy pop"}}
+        }},
+        {"Hip-Hop / Energy", {
+            {"Lose Yourself", {"Eminem", "Intense, motivating rap"}},
+            {"HUMBLE.", {"Kendrick Lamar", "Hard-hitting beat with sharp lyrics"}},
+            {"SICKO MODE", {"Travis Scott", "High-energy trap with beat switches"}}
+        }},
+        {"Lo-Fi / Study", {
+            {"Snowman", {"WYS", "Soft, calm beats for focus"}},
+            {"Aruarian Dance", {"Nujabes", "Mellow jazz-hop for studying"}},
+            {"Affection", {"Jinsang", "Relaxed lo-fi for long study sessions"}}
+        }},
+        {"Rock / Classic", {
+            {"Bohemian Rhapsody", {"Queen", "Epic, dramatic classic rock"}},
+            {"Sweet Child O' Mine", {"Guns N' Roses", "Famous guitar riff and hard rock energy"}},
+            {"Hotel California", {"Eagles", "Smooth, timeless guitar-driven rock"}}
+        }}
+    };
+
+    const std::vector<std::string> genres = {
+        "Pop / Upbeat",
+        "Hip-Hop / Energy",
+        "Lo-Fi / Study",
+        "Rock / Classic"
+    };
+
+    if (choice == 5) {
+        std::cout << "Goodbye!\n";
+        return;
+    }
+
+    if (choice < 1 || choice > 4) {
+        std::cout << "Invalid choice. Please select 1-5.\n";
+        return;
+    }
+
+    std::string genre = genres[choice - 1];
+    std::cout << "\nRecommended tracks for " << genre << ":\n";
+
+    for (const auto& track : tracks[genre]) {
+        std::cout << "- " << track.first
+                  << " by " << track.second[0]
+                  << " (" << track.second[1] << ")\n";
+    }
+}
+
+int main() {
     int userChoice = displayMessage();
+    logic(userChoice);
     return 0;
 }
