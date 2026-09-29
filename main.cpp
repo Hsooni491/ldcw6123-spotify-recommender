@@ -18,6 +18,7 @@ int displayMessage() {
 }
 
 void logic(int choice) {
+    // map tracks to their respective genres, artists, and descriptions
     std::map<std::string, std::map<std::string, std::vector<std::string>>> tracks = {
         {"Pop / Upbeat", {
             {"Blinding Lights", {"The Weeknd", "Fast, synth-driven pop"}},
@@ -41,6 +42,7 @@ void logic(int choice) {
         }}
     };
 
+    // define the genres in a vector for easy access
     const std::vector<std::string> genres = {
         "Pop / Upbeat",
         "Hip-Hop / Energy",
@@ -48,16 +50,19 @@ void logic(int choice) {
         "Rock / Classic"
     };
 
+    // handle user choice
     if (choice == 5) {
         std::cout << "Goodbye!\n";
         return;
     }
 
+    // validate user choice
     if (choice < 1 || choice > 4) {
         std::cout << "Invalid choice. Please select 1-5.\n";
         return;
     }
 
+    // get the selected genre
     std::string genre = genres[choice - 1];
     std::cout << "\nRecommended tracks for " << genre << ":\n";
 
@@ -68,6 +73,7 @@ void logic(int choice) {
     }
 }
 
+// main function to run the program
 int main() {
     int userChoice = displayMessage();
     logic(userChoice);
