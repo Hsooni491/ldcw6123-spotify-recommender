@@ -67,7 +67,7 @@ int displayMessage()
     return choice;
 }
 
-void logic(int choice)
+void logic(int choice, int tier)
 {
     TrackMap tracks = getTracks();
     // define the genres in a vector for easy access
@@ -126,11 +126,12 @@ void logic(int choice)
 int main()
 {
     int userChoice = 0;
+    int tier = chooseTier();
 
     while (userChoice != 5)
     {
         userChoice = displayMessage();
-        logic(userChoice);
+        logic(userChoice, tier);
     }
 
     return 0;
