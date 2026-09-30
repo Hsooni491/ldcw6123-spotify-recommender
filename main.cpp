@@ -38,6 +38,20 @@ int readNumber(const std::string &errorMessage)
     return number;
 }
 
+int chooseTier()
+{
+    std::cout << "\nWelcome to Spotify!\n";
+    std::cout << "1. Free (with ads)\n";
+    std::cout << "2. Premium (no ads)\n";
+    std::cout << "Choose your plan: ";
+    int tier = readNumber("Invalid input. Enter 1 or 2: ");
+    while (tier < 1 || tier > 2)
+    {
+        tier = readNumber("Please enter 1 or 2: ");
+    }
+    return tier;
+}
+
 int displayMessage()
 {
     int choice = 0;
