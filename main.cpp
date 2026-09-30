@@ -105,10 +105,9 @@ void logic(int choice, int tier)
     int pick;
     pick = readNumber("Invalid input. Enter a song number: ");
 
-    if (pick < 1 || pick > (int)titles.size())
+    while (pick < 1 || pick > (int)titles.size())
     {
-        std::cout << "Invalid song choice.\n";
-        return;
+        pick = readNumber("Invalid song number. Try again: ");
     }
 
     std::string title = titles[pick - 1];
