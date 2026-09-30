@@ -13,6 +13,91 @@ TrackMap getTracks()
         {"Lo-Fi / Study", {{"Snowman", {"WYS", "Soft, calm beats for focus"}}, {"Aruarian Dance", {"Nujabes", "Mellow jazz-hop for studying"}}, {"Affection", {"Jinsang", "Relaxed lo-fi for long study sessions"}}}},
         {"Rock / Classic", {{"Bohemian Rhapsody", {"Queen", "Epic, dramatic classic rock"}}, {"Sweet Child O' Mine", {"Guns N' Roses", "Famous guitar riff and hard rock energy"}}, {"Hotel California", {"Eagles", "Smooth, timeless guitar-driven rock"}}}}};
 }
+// search for a song
+void searchSong()
+{
+    TrackMap tracks = getTracks();
+    std::string search;
+
+    std::cout << "\nEnter song name to search: ";
+    std::getline(std::cin, search);
+
+    bool found = false;
+
+    for (const auto &genre : tracks)
+    {
+        for (const auto &track : genre.second)
+        {
+            if (track.first == search)
+            {
+                std::cout << "\nSong found!\n";
+                std::cout << "Song: " << track.first << "\n";
+                std::cout << "Artist: " << track.second[0] << "\n";
+                std::cout << "Genre: " << genre.first << "\n";
+                found = true;
+            }
+        }
+    }
+
+    if (!found)
+    {
+        std::cout << "Song not found.\n";
+    }
+}
+
+
+// Add a song to the playlist
+void addToPlaylist(std::vector<std::string> &playlist)
+{
+    TrackMap tracks = getTracks();
+    std::string song;
+
+    std::cout << "\nEnter song name to add to playlist: ";
+    std::getline(std::cin, song);
+
+    bool found = false;
+
+    for (const auto &genre : tracks)
+    {
+        for (const auto &track : genre.second)
+        {
+            if (track.first == song)
+            {
+                playlist.push_back(song);
+                std::cout << "Song added to your playlist!\n";
+                found = true;
+                break;
+            }
+        }
+
+        if (found)
+        {
+            break;
+        }
+    }
+
+    if (!found)
+    {
+        std::cout << "Song not found. Cannot add to playlist.\n";
+    }
+}
+
+// View the playlist
+void viewPlaylist(const std::vector<std::string> &playlist)
+{
+    if (playlist.empty())
+    {
+        std::cout << "\nYour playlist is empty.\n";
+        return;
+    }
+
+    std::cout << "\n===== YOUR PLAYLIST =====\n";
+
+    for (int i = 0; i < playlist.size(); i++)
+    {
+        std::cout << i + 1 << ". " << playlist[i] << "\n";
+    }
+}
 
 int readNumber(const std::string &errorMessage)
 {
@@ -56,13 +141,16 @@ int displayMessage()
     std::cout << "2. Hip-Hop / Energy\n";
     std::cout << "3. Lo-Fi / Study\n";
     std::cout << "4. Rock / Classic\n";
-    std::cout << "5. Exit\n";
+    std::cout << "5. Search for a song\n";
+    std::cout << "6. Add song to playlist\n";
+    std::cout << "7. View playlist\n";
+    std::cout << "8. Exit\n";
     std::cout << "Enter choice: ";
-    choice = readNumber("Invalid input. Enter a number 1-5: ");
+    choice = readNumber("Invalid input. Enter a number 1-8: ");
     return choice;
 }
 
-void logic(int choice, int tier)
+void logic(int choice, int tier, std::vector<std::string> &playlist)
 {
     TrackMap tracks = getTracks();
     // define the genres in a vector for easy access
@@ -73,16 +161,33 @@ void logic(int choice, int tier)
         "Rock / Classic"};
 
     // handle user choice
-    if (choice == 5)
-    {
-        std::cout << "Goodbye!\n";
-        return;
-    }
+   if (choice == 8)
+{
+    std::cout << "Goodbye!\n";
+    return;
+}
+
+   if (choice == 5)
+{
+    searchSong();
+    return;
+}
+   if (choice == 6)
+{
+    addToPlaylist(playlist);
+    return;
+}
+if (choice == 7)
+{
+    viewPlaylist(playlist);
+    return;
+}
+
 
     // validate user choice
-    if (choice < 1 || choice > 4)
+    if (choice < 1 || choice > 8)
     {
-        std::cout << "Invalid choice. Please select 1-5.\n";
+        std::cout << "Invalid choice. Please select 1-8.\n";
         return;
     }
 
@@ -130,11 +235,12 @@ int main()
 {
     int userChoice = 0;
     int tier = chooseTier();
+    std::vector<std::string> playlist;
 
-    while (userChoice != 5)
+    while (userChoice != 8)
     {
         userChoice = displayMessage();
-        logic(userChoice, tier);
+        logic(userChoice, tier, playlist);
     }
 
     return 0;
