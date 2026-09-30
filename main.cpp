@@ -50,7 +50,7 @@ int chooseTier()
 int displayMessage()
 {
     int choice = 0;
-    std::cout << "\n===== SPOTIFY MUSIC RECOMMENDATION ====\n";
+    std::cout << "\n===== SPOTIFY MUSIC RECOMMENDATION =====\n";
     std::cout << "Choose your preferred mood/genre:\n";
     std::cout << "1. Pop / Upbeat\n";
     std::cout << "2. Hip-Hop / Energy\n";
@@ -88,7 +88,7 @@ void logic(int choice, int tier)
 
     // get the selected genre
     std::string genre = genres[choice - 1];
-    std::cout << "\nRecommended tracks for " << genre << ":\n";
+    std::cout << "\nYour Discover Weekly-style picks for " << genre << ":\n";
 
     std::vector<std::string> titles;
     int number = 1;
