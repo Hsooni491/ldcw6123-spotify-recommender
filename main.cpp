@@ -111,7 +111,7 @@ int readNumber(const std::string &errorMessage)
         }
         std::cin.clear();
         std::cin.ignore(10000, '\n');
-        std::cout << errorMessage;
+        std::cout << errorMessage << std::flush;
     }
     std::cin.ignore(10000, '\n'); // discard anything typed after the number
     return number;
@@ -210,10 +210,11 @@ if (choice == 7)
     int pick;
     pick = readNumber("Invalid input. Enter a song number: ");
 
-    while (pick < 1 || pick > (int)titles.size())
-    {
-        pick = readNumber("Invalid song number. Try again: ");
-    }
+   while (pick < 1 || pick > (int)titles.size())
+{
+    std::cout << "Invalid song number. Try again: ";
+    pick = readNumber("Invalid input. Enter a number: ");
+}
 
     std::string title = titles[pick - 1];
     std::cout << "\nTrack: " << title << "\n";
