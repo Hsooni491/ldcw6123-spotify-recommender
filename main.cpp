@@ -75,6 +75,21 @@ void logic(int choice) {
         titles.push_back(track.first);
         number++;
     }
+
+    std::cout << "Choose a song: ";
+    int pick;
+    std::cin >> pick;
+
+    if (pick < 1 || pick > (int)titles.size()) {
+        std::cout << "Invalid song choice.\n";
+        return;
+    }
+
+    std::string title = titles[pick - 1];
+    std::cout << "\nTrack: " << title << "\n";
+    std::cout << "Artist: " << tracks[genre][title][0] << "\n";
+    std::cout << "Description: " << tracks[genre][title][1] << "\n";
+
 }
 
 // main function to run the program
