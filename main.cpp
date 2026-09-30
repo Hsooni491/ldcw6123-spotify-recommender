@@ -66,10 +66,14 @@ void logic(int choice) {
     std::string genre = genres[choice - 1];
     std::cout << "\nRecommended tracks for " << genre << ":\n";
 
+    std::vector<std::string> titles;   
+    int number = 1;
+
     for (const auto& track : tracks[genre]) {
-        std::cout << "- " << track.first
-                  << " by " << track.second[0]
-                  << " (" << track.second[1] << ")\n";
+        std::cout << number << ". " << track.first
+                  << " by " << track.second[0] << "\n";
+        titles.push_back(track.first);
+        number++;
     }
 }
 
