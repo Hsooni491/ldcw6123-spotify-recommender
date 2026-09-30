@@ -1,7 +1,14 @@
+// Spotify Music Recommendation System
+// LDCW6123 Group Project - Part 2 (C++)
+// Inspired by Spotify's personalised recommendations (Discover Weekly).
+// Part 1 link: Spotify's free tier was the low-end foothold in Christensen's
+// disruptive innovation model, and personalisation was how it moved upmarket.
+
 #include <iostream>
 #include <map>
 #include <string>
 #include <vector>
+#include <cstdlib>
 
 using TrackMap = std::map<std::string, std::map<std::string, std::vector<std::string>>>;
 TrackMap getTracks()
@@ -11,6 +18,24 @@ TrackMap getTracks()
         {"Hip-Hop / Energy", {{"Lose Yourself", {"Eminem", "Intense, motivating rap"}}, {"HUMBLE.", {"Kendrick Lamar", "Hard-hitting beat with sharp lyrics"}}, {"SICKO MODE", {"Travis Scott", "High-energy trap with beat switches"}}}},
         {"Lo-Fi / Study", {{"Snowman", {"WYS", "Soft, calm beats for focus"}}, {"Aruarian Dance", {"Nujabes", "Mellow jazz-hop for studying"}}, {"Affection", {"Jinsang", "Relaxed lo-fi for long study sessions"}}}},
         {"Rock / Classic", {{"Bohemian Rhapsody", {"Queen", "Epic, dramatic classic rock"}}, {"Sweet Child O' Mine", {"Guns N' Roses", "Famous guitar riff and hard rock energy"}}, {"Hotel California", {"Eagles", "Smooth, timeless guitar-driven rock"}}}}};
+}
+
+int readNumber(const std::string &errorMessage)
+{
+    int number;
+    while (!(std::cin >> number))
+    {
+        if (std::cin.eof())
+        {
+            std::cout << "\nInput closed. Goodbye!\n";
+            std::exit(0);
+        }
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
+        std::cout << errorMessage;
+    }
+    std::cin.ignore(10000, '\n'); // discard anything typed after the number
+    return number;
 }
 
 int displayMessage()
@@ -24,12 +49,7 @@ int displayMessage()
     std::cout << "4. Rock / Classic\n";
     std::cout << "5. Exit\n";
     std::cout << "Enter choice: ";
-    while (!(std::cin >> choice))
-    {
-        std::cin.clear();
-        std::cin.ignore(10000, '\n');
-        std::cout << "Invalid input. Enter a number 1-5: ";
-    }
+    choice = readNumber("Invalid input. Enter a number 1-5: ");
     return choice;
 }
 
@@ -74,12 +94,7 @@ void logic(int choice)
 
     std::cout << "Choose a song: ";
     int pick;
-    while (!(std::cin >> pick))
-    {
-        std::cin.clear();
-        std::cin.ignore(10000, '\n');
-        std::cout << "Invalid input. Enter a song number: ";
-    }
+    pick = readNumber("Invalid input. Enter a song number: ");
 
     if (pick < 1 || pick > (int)titles.size())
     {
