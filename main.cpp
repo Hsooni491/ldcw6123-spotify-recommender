@@ -75,7 +75,12 @@ void logic(int choice) {
 
 // main function to run the program
 int main() {
-    int userChoice = displayMessage();
-    logic(userChoice);
+    int userChoice = 0;
+
+    while (userChoice != 5) {
+        userChoice = displayMessage();
+        logic(userChoice);
+    }
+
     return 0;
 }
