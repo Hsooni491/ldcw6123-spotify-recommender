@@ -1,9 +1,3 @@
-// Spotify Music Recommendation System
-// LDCW6123 Group Project - Part 2 (C++)
-// Inspired by Spotify's personalised recommendations (Discover Weekly).
-// Part 1 link: Spotify's free tier was the low-end foothold in Christensen's
-// disruptive innovation model, and personalisation was how it moved upmarket.
-
 #include <iostream>
 #include <map>
 #include <string>
@@ -38,6 +32,7 @@ int readNumber(const std::string &errorMessage)
     return number;
 }
 
+// Asks the user for a plan: Free (ads) or Premium (no ads)
 int chooseTier()
 {
     std::cout << "\nWelcome to Spotify!\n";
@@ -120,6 +115,15 @@ void logic(int choice, int tier)
     std::cout << "\nTrack: " << title << "\n";
     std::cout << "Artist: " << tracks[genre][title][0] << "\n";
     std::cout << "Description: " << tracks[genre][title][1] << "\n";
+
+    if (tier == 1)
+    {
+        std::cout << "\n[Ad break] Upgrade to Premium for ad-free music.\n";
+    }
+    else
+    {
+        std::cout << "\n[Premium] Ad-free listening. Download for offline play.\n";
+    }
 }
 
 // main function to run the program
